@@ -1,4 +1,6 @@
 var command = require('./command.js');
+var request = require('request');
+
 // Output a prompt
 process.stdout.write('prompt > ');
 
@@ -27,6 +29,14 @@ process.stdin.on('data', function (data) {
   if(cmd.slice(0, 4) === 'tail'){
     command.tail(cmd.slice(5));
   }
+  if(cmd.slice(0, 4) === 'curl'){
+    request(cmd.slice(5), function(error, response, body){
+      console.log('body:', body);
+    });
+  }
+
+
+
   process.stdout.write('\nprompt > ');
 
 });
