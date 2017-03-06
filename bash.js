@@ -1,3 +1,4 @@
+var command = require('./command.js');
 // Output a prompt
 process.stdout.write('prompt > ');
 
@@ -5,12 +6,14 @@ process.stdout.write('prompt > ');
 process.stdin.on('data', function (data) {
   var cmd = data.toString().trim(); // remove the newline
   if(cmd === 'pwd'){
-    process.stdout.write(process.env.PWD);
+    command.pwd();
 
   }
   if(cmd === "date"){
-    var date = new Date(Date.now()).toString();
-    process.stdout.write(date);
+    command.date();
+  }
+  if (cmd === "ls") {
+    command.ls();
   }
   process.stdout.write('\nprompt > ');
 
